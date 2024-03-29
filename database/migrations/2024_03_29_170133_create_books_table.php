@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('author');
-            $table->integer('number_of_pages');
+            $table->unsignedSmallInteger('number_of_pages');
             $table->timestamps();
         });
     }
