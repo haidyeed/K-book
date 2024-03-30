@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserReadingIntervalRequest;
+use App\Models\User;
 use App\Models\UserReadingInterval;
 use App\Services\BookService;
+use App\Services\SMSService\SMSProviderContext;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class UserReadingIntervalController extends Controller
 {
@@ -64,6 +68,16 @@ class UserReadingIntervalController extends Controller
         $userReadingInterval->end_page = $request->end_page;
 
         $userReadingInterval->save();
+
+        $smsProvider = config('sms.sms_provider');
+
+        try {
+            $user=User::find($request->user_id);
+            $provider = new SMSProviderContext($smsProvider);
+            $provider->send($user);
+        } catch (Throwable $th) {
+            Log::channel('api')->info("sms provider error: $th");
+        }
 
         return response()->json([
             'success' => true,
