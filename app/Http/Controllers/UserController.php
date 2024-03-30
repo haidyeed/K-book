@@ -44,7 +44,7 @@ class UserController extends Controller
         if (!Auth::validate($credentials)) {
             //this indicates that login validation passed but credentials are not matched
             Log::channel('api')->info("Account login failed.".trans('auth.failed'));
-            return response()->json(['errors' => "Account login failed." ,'message'=>trans('auth.failed')], 200);
+            return response()->json(['errors' => "Account login failed." ,'message'=>trans('auth.failed')], 401);
         }
 
         try {
