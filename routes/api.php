@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("register",[UserController::class,'register']);
+Route::post("register",[UserController::class,'register'])->name('register');
 
 Route::post('login', [UserController::class,'login'])->name('login');
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::resources([
         'books' => BookController::class,

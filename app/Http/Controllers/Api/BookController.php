@@ -57,4 +57,83 @@ class BookController extends Controller
 
     }
 
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     */
+    public function update($request,$id)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $book= Book::find($id);
+
+       if($book){
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Book',
+            'data' => $book
+        ], 200);
+
+       }
+
+       return response()->json([
+        'success' => false,
+        'message' => 'this Book is not found',
+       ], 404);
+
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  int  $id
+     */
+    public function destroy($id)
+    {
+        $book = Book::find($id);
+
+        if ($book){
+            if($book->delete()){
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Book deleted successfully'
+                ], 200);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Bad request, this Book is not deleted'
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'this Book is not found'
+        ], 404);
+    }
+
 }
