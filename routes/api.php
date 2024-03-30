@@ -29,4 +29,6 @@ Route::group(['middleware' => 'auth:api'], function(){
         'user-reading-intervals' => UserReadingIntervalController::class,
     ]);
 
+    Route::get('/top-recommended-books', [UserReadingIntervalController::class, 'topRecommendedBooks'])->name('recommended-books');
+
 });

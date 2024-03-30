@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserReadingIntervalRequest;
 use App\Models\UserReadingInterval;
+use App\Services\BookService;
 
 class UserReadingIntervalController extends Controller
 {
@@ -70,6 +71,17 @@ class UserReadingIntervalController extends Controller
             'data' => $userReadingInterval
         ], 200);
 
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function topRecommendedBooks()
+    {
+        $bookService = new BookService();
+        return $bookService->topRecommendedBooks();
     }
 
 }
