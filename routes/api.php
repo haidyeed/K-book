@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\UserReadingIntervalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +23,12 @@ Route::post('login', [UserController::class,'login'])->name('login');
 Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+
+    Route::resources([
+        'books' => BookController::class,
+        'user-reading-intervals' => UserReadingIntervalController::class,
+    ]);
+
+    Route::get('/top-recommended-books', [UserReadingIntervalController::class, 'topRecommendedBooks'])->name('recommended-books');
 
 });
