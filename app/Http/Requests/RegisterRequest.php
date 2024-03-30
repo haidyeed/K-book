@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'phone' => 'required|digits_between:7,20',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'password' => 'required|digits_between:8,20',
             'password_confirmation' => 'required|same:password',
