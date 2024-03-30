@@ -52,13 +52,14 @@ class UserController extends Controller
             $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
             Session::flush();
+
             Auth::login($user);
             $success['token'] =  $user->createToken('MyApp')->accessToken;
 
         } catch (\Exception $e) {
             //this response indicates that login validation passed & credentials matched but login failed for different reason
             Log::channel('api')->info("login failed, " . $e->getMessage());
-            return response()->json(['error' => "unauthorized" ,'message'=>"authentication failed"], 401);
+            return response()->json(['error' => "unauthorized" ,'message'=>$e->getMessage()], 401);
 
         }
 

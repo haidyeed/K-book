@@ -84,7 +84,11 @@ class BookService
             ];
         }
     
-        return response()->json($recommendedBooks,200);
+        return response()->json([
+            'success' => true,
+            'message' => 'a list of top recommended 5 books',
+            'data' => $recommendedBooks
+        ], 200);
 
     }
 

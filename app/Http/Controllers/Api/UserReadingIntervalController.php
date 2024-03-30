@@ -23,8 +23,8 @@ class UserReadingIntervalController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'a list of all books',
-            'data' => $$userReadingIntervals
+            'message' => 'a list of all reading intervals',
+            'data' => $userReadingIntervals
         ], 200);
 
     }
@@ -96,6 +96,85 @@ class UserReadingIntervalController extends Controller
     {
         $bookService = new BookService();
         return $bookService->topRecommendedBooks();
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     */
+    public function update($request,$id)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $userReadingInterval= UserReadingInterval::find($id);
+
+       if($userReadingInterval){
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reading Interval',
+            'data' => $userReadingInterval
+        ], 200);
+
+       }
+
+       return response()->json([
+        'success' => false,
+        'message' => 'this Reading Interval is not found',
+       ], 404);
+
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  int  $id
+     */
+    public function destroy($id)
+    {
+        $userReadingInterval = UserReadingInterval::find($id);
+
+        if ($userReadingInterval){
+            if($userReadingInterval->delete()){
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Reading Interval deleted successfully'
+                ], 200);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Bad request, this Reading Interval is not deleted'
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'this Reading Interval is not found'
+        ], 404);
     }
 
 }
