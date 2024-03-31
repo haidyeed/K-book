@@ -28,7 +28,7 @@ class StoreBookRequest extends FormRequest
         return [
             'name' => 'required|unique:books|min:5|max:150',
             'author' => 'required|min:5|max:150',
-            'number_of_pages' => 'required|integer|min:10|max:5000',
+            'number_of_pages' => 'required|integer|min:1|max:5000',
         ];
     }
 

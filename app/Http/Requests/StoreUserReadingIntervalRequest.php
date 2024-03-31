@@ -31,7 +31,7 @@ class StoreUserReadingIntervalRequest extends FormRequest
         return [
             'user_id' => 'required|integer|min:1|exists:users,id',
             'book_id' => 'required|integer|min:1',
-            'start_page' => 'required|integer|min:10|max:'.$number_of_pages,
+            'start_page' => 'required|integer|min:1|max:'.$number_of_pages,
             'end_page' => 'required|integer|min:'.request()->start_page.'|max:'.$number_of_pages,
         ];
     }
